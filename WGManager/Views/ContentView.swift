@@ -21,7 +21,7 @@ struct ContentView: View {
                     Label("Kalender", systemImage: "calendar")
                 }
             
-            ShoppingListView()
+            GroceryView()
                 .tabItem {
                     Label("Einkaufsliste", systemImage: "cart.fill")
                 }
@@ -39,12 +39,6 @@ struct ContentView: View {
 struct AppointmentsView: View {
     var body: some View {
         Text("Termine")
-    }
-}
-
-struct ShoppingListView: View {
-    var body: some View {
-        Text("Einkaufsliste")
     }
 }
 
