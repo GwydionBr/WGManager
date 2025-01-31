@@ -7,11 +7,23 @@
 
 import SwiftUI
 
+
 struct GroceryView: View {
     var body: some View {
-        VStack(spacing: 0) {
-            AddGroceryView()
-            GroceryList()
+        NavigationStack {
+            VStack(spacing: 0) {
+                AddGroceryView()
+                GroceryList()
+            }
+            .navigationTitle("Einkaufsliste") // ✅ Titel der Navbar
+            .toolbar {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    NavigationLink(destination: MealView()) {
+                        Image(systemName: "fork.knife") // 🍽 SFSymbol für Mahlzeiten
+                            .font(.title2)
+                    }
+                }
+            }
         }
     }
 }

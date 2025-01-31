@@ -30,8 +30,9 @@ struct AddGroceryView: View {
         private func saveGrocery() {
             guard !groceryName.isEmpty else { return } // Falls das Feld leer ist, nichts tun
 
-            let newGrocery = Grocery(
-                name: groceryName
+            let newGrocery = GroceryItem(
+                name: groceryName,
+                isActivated: true
             )
             
             modelContext.insert(newGrocery) // ✅ In SwiftData speichern

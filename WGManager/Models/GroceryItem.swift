@@ -9,14 +9,16 @@ import Foundation
 import SwiftData
 
 @Model
-class Grocery {
-    var name: String = ""
+class GroceryItem {
+    var name: String
     var amount: Int = 1
     var category: String = ""
     var isChecked: Bool = false
+    var isActivated: Bool
     var timestamp: Date = Date()
     
-    init(name: String) {
+    init(name: String, isActivated: Bool = true) {
         self.name = name
+        self.isActivated = isActivated
     }
 }

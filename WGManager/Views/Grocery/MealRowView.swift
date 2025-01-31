@@ -8,11 +8,41 @@
 import SwiftUI
 
 struct MealRowView: View {
+    var meal: Meal
+
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        VStack(alignment: .leading) {
+            HStack {
+                VStack(alignment: .leading) {
+                    Text(meal.name)
+                        .font(.headline)
+                }
+                Spacer()
+                
+                if meal.isFavorite {
+                    Image(systemName: "star.fill")
+                        .foregroundColor(.yellow) // Favoriten-Icon
+                }
+            }
+            
+            // ✅ Die `List` außerhalb der HStack platzieren
+            
+            ForEach(meal.ingredients) { ingredient in
+                Button {
+                    ingredient.isActivated = true
+                } label: {
+                    if ingredient.isActivated {
+                        GroceryRow(grocery: ingredient)
+                    } else {
+                        DeactiveGroceryRow(grocery: ingredient)
+                    }
+                }
+            }
+        }
+        .padding(.vertical, 6)
     }
 }
 
-#Preview {
-    MealRowView()
-}
+//#Preview {
+//    MealRowView()
+//}

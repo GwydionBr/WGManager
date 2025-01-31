@@ -15,6 +15,6 @@ struct WGManagerApp: App {
         WindowGroup {
             ContentView()
         }
-        .modelContainer(for: [User.self, Grocery.self])
+        .modelContainer(for: [User.self, GroceryItem.self, Meal.self])
     }
 }

@@ -9,12 +9,24 @@ import SwiftUI
 import SwiftData
 
 struct GroceryList: View {
-    @Query(sort: \Grocery.timestamp, order: .reverse) private var groceries: [Grocery]
+    @Query(filter: #Predicate<GroceryItem> { $0.isActivated },
+           sort: \GroceryItem.timestamp,
+           order: .reverse) private var groceries: [GroceryItem]
+    @Query(filter: #Predicate<GroceryItem> { !$0.isActivated },
+           sort: \GroceryItem.timestamp,
+           order: .reverse) private var deactiveGroceries: [GroceryItem]
     
     var body: some View {
         List {
-            ForEach(groceries) { grocery in
-                GroceryRow(grocery: grocery)
+            Section(header: Text("Groceries")) {
+                ForEach(groceries) { grocery in
+                    GroceryRow(grocery: grocery)
+                }
+            }
+            Section(header: Text("Deactivated")) {
+                ForEach(deactiveGroceries) { grocery in
+                    DeactiveGroceryRow(grocery: grocery)
+                }
             }
         }
     }

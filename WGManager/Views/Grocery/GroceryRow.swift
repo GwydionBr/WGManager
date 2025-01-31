@@ -9,7 +9,7 @@ import SwiftUI
 import SwiftData
 
 struct GroceryRow: View {
-    @Bindable var grocery: Grocery
+    @Bindable var grocery: GroceryItem
     
     var body: some View {
         HStack {
@@ -44,5 +44,5 @@ struct GroceryRow: View {
 
 
 #Preview {
-    GroceryRow(grocery: Grocery(name: "Milch"))
+    GroceryRow(grocery: GroceryItem(name: "Milch"))
 }
