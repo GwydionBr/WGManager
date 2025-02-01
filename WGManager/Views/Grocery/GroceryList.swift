@@ -9,25 +9,51 @@ import SwiftUI
 import SwiftData
 
 struct GroceryList: View {
-    @Query(filter: #Predicate<GroceryItem> { $0.isActivated },
-           sort: \GroceryItem.timestamp,
-           order: .reverse) private var groceries: [GroceryItem]
-    @Query(filter: #Predicate<GroceryItem> { !$0.isActivated },
-           sort: \GroceryItem.timestamp,
-           order: .reverse) private var deactiveGroceries: [GroceryItem]
-    
+    @Environment(\.modelContext) private var modelContext
+    @State private var editId: UUID? = nil
+
+    @Query(sort: \GroceryItem.timestamp, order: .reverse) private var allGroceries: [GroceryItem] // ✅ Eine einzige Query
+
     var body: some View {
         List {
-            Section(header: Text("Groceries")) {
-                ForEach(groceries) { grocery in
-                    GroceryRow(grocery: grocery)
+            let groceries = allGroceries.filter { !$0.isChecked } // ❌ Nicht abgehakt
+            let checkedGroceries = allGroceries.filter { $0.isChecked } // ✅ Abgehakt
+            let deactiveGroceries = allGroceries.filter { !$0.isActivated } // 🔄 Deaktivierte
+            
+            if !groceries.isEmpty {
+                Section(header: Text("Groceries")) {
+                    ForEach(groceries) { grocery in
+                        GroceryRow(grocery: grocery, editId: $editId)
+                    }
+                    .onDelete(perform: { deleteGrocery(offsets: $0, from: groceries) })
                 }
             }
-            Section(header: Text("Deactivated")) {
-                ForEach(deactiveGroceries) { grocery in
-                    DeactiveGroceryRow(grocery: grocery)
+            
+            if !checkedGroceries.isEmpty {
+                Section(header: Text("Checked")) {
+                    ForEach(checkedGroceries) { grocery in
+                        GroceryRow(grocery: grocery, editId: $editId)
+                    }
+                    .onDelete(perform: { deleteGrocery(offsets: $0, from: checkedGroceries) })
                 }
             }
+            
+            if !deactiveGroceries.isEmpty {
+                Section(header: Text("Deactivated")) {
+                    ForEach(deactiveGroceries) { grocery in
+                        DeactiveGroceryRow(grocery: grocery)
+                    }
+                    .onDelete(perform: { deleteGrocery(offsets: $0, from: deactiveGroceries) })
+                }
+            }
+        }
+    }
+    
+    /// Allgemeine Löschfunktion für alle Kategorien
+    private func deleteGrocery(offsets: IndexSet, from list: [GroceryItem]) {
+        for index in offsets {
+            let groceryToDelete = list[index]
+            modelContext.delete(groceryToDelete)
         }
     }
 }

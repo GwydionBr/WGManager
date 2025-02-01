@@ -11,10 +11,10 @@ import SwiftData
 @Model
 class Meal {
     var name: String = ""
-    var ingredients: [GroceryItem] = []
+    var ingredients: [Ingredient] = []
     var isFavorite: Bool = false
     
-    init(name: String, ingredients: [GroceryItem]) {
+    init(name: String, ingredients: [Ingredient]) {
         self.name = name
         self.ingredients = ingredients
     }

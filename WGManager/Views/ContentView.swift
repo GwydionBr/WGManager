@@ -11,6 +11,11 @@ struct ContentView: View {
     
     var body: some View {
         TabView {
+            GroceryView()
+                .tabItem {
+                    Label("Einkaufsliste", systemImage: "cart.fill")
+                }
+            
             AppointmentsView()
                 .tabItem {
                     Label("Termine", systemImage: "clock.fill")
@@ -19,11 +24,6 @@ struct ContentView: View {
             CalendarView()
                 .tabItem {
                     Label("Kalender", systemImage: "calendar")
-                }
-            
-            GroceryView()
-                .tabItem {
-                    Label("Einkaufsliste", systemImage: "cart.fill")
                 }
             
             ProfileView()

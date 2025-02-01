@@ -28,16 +28,11 @@ struct MealRowView: View {
             // ✅ Die `List` außerhalb der HStack platzieren
             
             ForEach(meal.ingredients) { ingredient in
-                Button {
-                    ingredient.isActivated = true
-                } label: {
-                    if ingredient.isActivated {
-                        GroceryRow(grocery: ingredient)
-                    } else {
-                        DeactiveGroceryRow(grocery: ingredient)
-                    }
+
+                        IngredientRow(ingredient: ingredient)
+
                 }
-            }
+            
         }
         .padding(.vertical, 6)
     }

@@ -11,7 +11,7 @@ struct MealView: View {
     var body: some View {
         NavigationStack {
             VStack {
-                ListMealView()
+                MealList()
             }
             .navigationTitle("Mahlzeiten") // ✅ Titel der Navbar
             .toolbar {
