@@ -22,21 +22,6 @@ struct Profile: Codable {
     }
 }
 
-struct ShoppingItem: Codable, Identifiable, Hashable {
-    var id: UUID
-    var name: String
-    var quantity: Int
-    var category: String
-    var isComplete: Bool
-    var userID: UUID
-    
-    enum CodingKeys: String, CodingKey {
-        case id, name, quantity, category
-        case isComplete = "is_complete"
-        case userID = "user_id"
-    }
-}
-
 
 struct Feature: Codable, Identifiable, Hashable {
     var id: Int?

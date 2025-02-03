@@ -6,13 +6,30 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct CategoryRow: View {
+    @Environment(\.modelContext) private var modelContext
+    @Bindable var category: GroceryCategory
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        Text(category.name)
+        
     }
 }
 
 #Preview {
-    CategoryRow()
+    let config = ModelConfiguration(isStoredInMemoryOnly: true)
+    let container = try! ModelContainer(for: GroceryCategory.self, configurations: config)
+    
+    let category = GroceryCategory(name: "Test")
+    let category2 = GroceryCategory(name: "Test2")
+    
+    Spacer()
+    CategoryRow(category: category)
+        .modelContainer(container)
+    Spacer()
+    CategoryRow(category: category2)
+        .modelContainer(container)
+    Spacer()
 }

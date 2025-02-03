@@ -13,6 +13,7 @@ struct GroceryView: View {
         NavigationStack {
             VStack(spacing: 0) {
                 AddGroceryView()
+                Divider()
                 GroceryList()
             }
             .navigationTitle("Einkaufsliste") // ✅ Titel der Navbar
@@ -24,7 +25,7 @@ struct GroceryView: View {
                     }
                 }
                 ToolbarItem(placement: .navigationBarTrailing) {
-                    NavigationLink(destination: GroceryCategoryView()) {
+                    NavigationLink(destination: CategoryView()) {
                         Image(systemName: "list.bullet") // 📋 SFSymbol für Kategorien
                             .font(.title2)
                     }

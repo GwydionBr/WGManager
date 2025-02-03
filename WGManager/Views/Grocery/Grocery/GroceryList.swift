@@ -58,6 +58,21 @@ struct GroceryList: View {
     }
 }
 
-//#Preview {
-//    GroceryListView()
-//}
+#Preview {
+    do {
+           let config = ModelConfiguration(isStoredInMemoryOnly: true)
+           let container = try ModelContainer(for: GroceryItem.self, configurations: config)
+           
+           // Beispiel-Daten einfügen
+           let context = container.mainContext
+           for i in 1...5 {
+               let grocery = GroceryItem(name: "Test \(i)")
+               context.insert(grocery)
+           }
+           
+           return GroceryList()
+               .modelContainer(container)
+       } catch {
+           return Text("Fehler beim Laden der Vorschau: \(error.localizedDescription)")
+       }
+}
