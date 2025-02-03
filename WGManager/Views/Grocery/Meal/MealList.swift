@@ -19,10 +19,10 @@ struct MealList: View {
                     .foregroundColor(.gray)
                     .padding()
             } else {
-                ForEach(meals) { meal in
-                    MealRowView(meal: meal) // ✅ Meal in einer eigenen Zeilen-View darstellen
-                }
-                .onDelete(perform: deleteMeal) // ✅ Swipe-to-Delete hinzufügen
+                    ForEach(meals) { meal in
+                        MealRowView(meal: meal) // ✅ Meal in einer eigenen Zeilen-View darstellen
+                    }
+                    .onDelete(perform: deleteMeal) // ✅ Swipe-to-Delete hinzufügen
             }
         }
     }

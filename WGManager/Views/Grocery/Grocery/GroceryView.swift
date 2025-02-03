@@ -23,6 +23,12 @@ struct GroceryView: View {
                             .font(.title2)
                     }
                 }
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    NavigationLink(destination: GroceryCategoryView()) {
+                        Image(systemName: "list.bullet") // 📋 SFSymbol für Kategorien
+                            .font(.title2)
+                    }
+                }
             }
         }
     }
