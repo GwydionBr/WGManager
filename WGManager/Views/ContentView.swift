@@ -16,7 +16,7 @@ struct ContentView: View {
                     Label("Einkaufsliste", systemImage: "cart.fill")
                 }
             
-            AppointmentsView()
+            AppointmentView()
                 .tabItem {
                     Label("Termine", systemImage: "clock.fill")
                 }
@@ -31,14 +31,6 @@ struct ContentView: View {
                     Label("Profil", systemImage: "person.fill")
                 }
         }
-    }
-}
-
-// Beispielansichten für Tabs
-
-struct AppointmentsView: View {
-    var body: some View {
-        Text("Termine")
     }
 }
 
