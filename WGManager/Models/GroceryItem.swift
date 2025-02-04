@@ -11,11 +11,11 @@ import SwiftData
 @Model
 class GroceryItem {
     var id: UUID = UUID()
-    var name: String
+    var name: String = ""
     var amount: Int = 1
     var unit: String = "Stück"
     var isChecked: Bool = false
-    var isActivated: Bool
+    var isActivated: Bool = true
     var timestamp: Date = Date()
     
     @Relationship(deleteRule: .nullify)

@@ -21,10 +21,11 @@ struct ContentView: View {
                     Label("Termine", systemImage: "clock.fill")
                 }
             
-            CalendarView()
+            TaskView()
                 .tabItem {
-                    Label("Kalender", systemImage: "calendar")
+                    Label("Aufgaben", systemImage: "checkmark.circle.fill")
                 }
+            
             
             ProfileView()
                 .tabItem {
@@ -33,6 +34,13 @@ struct ContentView: View {
         }
     }
 }
+
+struct TaskView: View {
+    var body: some View {
+        Text("Tasks")
+    }
+}
+
 
 struct ProfileView: View {
     var body: some View {

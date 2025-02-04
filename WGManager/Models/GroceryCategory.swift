@@ -12,17 +12,17 @@ import UIKit
 @Model
 class GroceryCategory: Identifiable {
     var id: UUID = UUID()
-    var name: String
-    var timestamp: Date
+    var name: String = ""
+    var timestamp: Date = Date()
 
     @Relationship(deleteRule: .cascade)
-    var subcategories: [GroceryCategory] = []
+    var subcategories: [GroceryCategory]? = [GroceryCategory]()
     
     @Relationship(inverse: \GroceryCategory.subcategories)
     var parent: GroceryCategory?
     
     @Relationship(inverse: \GroceryItem.category) // Beziehung zu GroceryItem
-        var groceryItems: [GroceryItem] = []
+        var groceryItems: [GroceryItem]? = [GroceryItem]()
 
     init(name: String, parent: GroceryCategory? = nil) {
         self.name = name

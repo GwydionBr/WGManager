@@ -27,11 +27,15 @@ struct MealRowView: View {
             
             // ✅ Die `List` außerhalb der HStack platzieren
             
-            ForEach(meal.ingredients) { ingredient in
-
-                        IngredientRow(ingredient: ingredient)
-
+            if meal.ingredients == nil || meal.ingredients!.isEmpty {
+                Text("No ingredients")
+                    .foregroundColor(.secondary)
+                    .font(.caption)
+            } else {
+                ForEach(meal.ingredients!, id: \.self) { ingredient in
+                    IngredientRow(ingredient: ingredient)
                 }
+            }
             
         }
         .padding(.vertical, 6)
